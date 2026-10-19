@@ -27,4 +27,4 @@
 
 ## Дошка проєкту
 
-[Переглянути дошку GitHub Projects]([ВСТАВ_ПОСИЛАННЯ_НА_ДОШКУ](https://github.com/users/cYuQb6XmF31v/projects/1/views/1?layout=board))
+Переглянути дошку GitHub Projects - https://github.com/users/cYuQb6XmF31v/projects/1/views/1?layout=board
