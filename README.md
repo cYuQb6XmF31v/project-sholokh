@@ -24,3 +24,7 @@
 
 Картка проєкту, бачення продукту та аналіз аналогів
 знаходяться у файлі docs/01-project-card.md.
+
+## Дошка проєкту
+
+[Переглянути дошку GitHub Projects]([ВСТАВ_ПОСИЛАННЯ_НА_ДОШКУ](https://github.com/users/cYuQb6XmF31v/projects/1/views/1?layout=board))
