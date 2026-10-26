@@ -23,8 +23,10 @@
 ## Документація
 
 Картка проєкту, бачення продукту та аналіз аналогів
-знаходяться у файлі docs/01-project-card.md
-ТЗ та SRS у файлі docs/06-srs.md
+знаходяться у файлі [docs/01-project-card.md.](https://github.com/cYuQb6XmF31v/project-sholokh/blob/af0dd1d78ec9c2230ce78fb045840ea65dceb514/docs/01-project-card.md)
+Вимоги до проекту у файлі [docs/05-requirements.md.](https://github.com/cYuQb6XmF31v/project-sholokh/blob/af0dd1d78ec9c2230ce78fb045840ea65dceb514/docs/05-requirements.md)
+ТЗ та SRS у файлі [docs/06-srs.md.](https://github.com/cYuQb6XmF31v/project-sholokh/blob/af0dd1d78ec9c2230ce78fb045840ea65dceb514/docs/06-srs.md)
+
 
 ## Дошка проєкту
 
