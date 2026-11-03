@@ -1,0 +1,24 @@
+
+@startuml
+left to right direction
+
+skinparam rectangle {
+    RoundCorner 15
+}
+
+actor "QA-інженер" as QA
+actor "Системний адміністратор" as Admin
+
+rectangle "Вебзастосунок для\nавтоматичного створення\nтест-кейсів" as System #E3F2FD
+
+rectangle "Зовнішній AI-сервіс" as AI #FFF3E0
+
+QA --> System : введення вимог,\nгенерація та перевірка тест-кейсів
+
+Admin --> System : керування користувачами\nта налаштуваннями
+
+System --> AI : передавання вимог\nдля аналізу
+
+AI --> System : результати аналізу\nта згенеровані тест-кейси
+
+@enduml
