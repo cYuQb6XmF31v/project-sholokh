@@ -1,0 +1,47 @@
+
+@startuml
+
+title Діаграма діяльності — Генерація тест-кейсів
+
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam activity {
+    BackgroundColor #E8F1FC
+    BorderColor #3973AC
+    DiamondBackgroundColor #FFF4CC
+    DiamondBorderColor #C9A227
+    BarColor #3973AC
+}
+
+|Користувач|
+start
+:Ввести вимогу;
+
+|Система|
+:Перевірити вимогу;
+
+while (Є помилки?) is (Так)
+    :Показати помилки;
+    |Користувач|
+    :Виправити вимогу;
+    |Система|
+    :Повторно перевірити;
+endwhile (Ні)
+
+:Проаналізувати вимогу;
+
+fork
+    :Створити позитивні сценарії;
+fork again
+    :Створити негативні сценарії;
+end fork
+
+:Сформувати тест-кейси;
+:Зберегти результати;
+
+|Користувач|
+:Переглянути тест-кейси;
+stop
+
+@enduml
