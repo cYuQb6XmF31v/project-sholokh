@@ -1,0 +1,34 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam defaultFontColor #243247
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowColor #55708F
+skinparam dpi 150
+skinparam state {
+  BackgroundColor #EAF1F8
+  BorderColor #54708E
+  ArrowColor #54708E
+}
+
+ title Тренувальна діаграма станів замовлення — Інтернет-магазин
+
+[*] --> Нове
+Нове --> Підтверджене : підтвердитиЗамовлення()
+Підтверджене --> Оплачене : отриматиПідтвердженняОплати()
+Оплачене --> Відправлене : передатиПеревізнику()
+Відправлене --> Доставлене : підтвердитиДоставку()
+Доставлене --> [*]
+
+legend left
+  **Легенда**
+  Чорна крапка — початковий стан
+  Заокруглений блок — стан об'єкта
+  Стрілка з підписом — подія переходу
+  Кінцева крапка — завершення життєвого циклу
+  --
+  Автор: [ПІБ студента] | Версія: 1.0 | Дата: 22.11.2026
+endlegend
+@enduml

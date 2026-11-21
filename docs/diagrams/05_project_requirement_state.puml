@@ -1,0 +1,44 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam defaultFontColor #243247
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowColor #55708F
+skinparam dpi 150
+skinparam state { BackgroundColor #EAF1F8; BorderColor #54708E; ArrowColor #54708E }
+
+ title Діаграма станів сутності «Вимога» — Генератор тест-кейсів
+
+state "Чернетка" as Draft
+state "Перевірка" as Validation
+state "Потребує виправлення" as Correction
+state "Перевірена" as Validated
+state "Генерація тест-кейсів" as Generating
+state "Тест-кейси створені" as Generated
+state "Помилка генерації" as Failed
+state "Архівована" as Archived
+
+[*] --> Draft
+Draft --> Validation : надіслатиНаПеревірку()
+Validation --> Validated : [усі обов'язкові поля заповнені]
+Validation --> Correction : [є помилки або нечіткі формулювання]
+Correction --> Draft : виправитиВимогу()
+Validated --> Generating : запуститиГенерацію()
+Generating --> Generated : [аналіз завершився успішно]
+Generating --> Failed : [сервіс недоступний або сталася помилка]
+Failed --> Generating : повторитиГенерацію()
+Generated --> Archived : архівуватиРезультат()
+Archived --> [*]
+
+legend left
+  **Легенда**
+  Стан — поточний етап життєвого циклу вимоги
+  Назва події — причина переходу
+  [умова] — guard, який має бути істинним
+  Початкова / кінцева крапка — межі життєвого циклу
+  --
+  Автор: [ПІБ студента] | Версія: 1.0 | Дата: 22.11.2026
+endlegend
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam defaultFontColor #243247
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowColor #55708F
+skinparam dpi 150
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #EAF1F8
+  BorderColor #54708E
+  ArrowColor #54708E
+}
+
+ title Тренувальна діаграма класів — Інтернет-магазин
+
+class "Покупець" as Customer {
+  - id: int
+  - name: string
+  - email: string
+  + viewCatalog(): void
+  + createOrder(): Order
+}
+
+class "Замовлення" as Order {
+  - id: int
+  - createdAt: Date
+  - status: OrderStatus
+  + calculateTotal(): decimal
+  + confirm(): void
+}
+
+class "Позиція замовлення" as OrderItem {
+  - quantity: int
+  - unitPrice: decimal
+  + getSubtotal(): decimal
+}
+
+Customer "1" -- "0..*" Order : створює
+Order "1" *-- "1..*" OrderItem : містить
+
+legend left
+  **Легенда**
+  + public | - private | # protected
+  1 — рівно один об'єкт
+  0..* — нуль або багато об'єктів
+  1..* — один або багато об'єктів
+  *-- — композиція (частина не існує окремо від цілого)
+  --
+  Автор: [ПІБ студента] | Версія: 1.0 | Дата: 22.11.2026
+endlegend
+@enduml

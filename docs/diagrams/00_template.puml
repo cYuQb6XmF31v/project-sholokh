@@ -1,0 +1,68 @@
+@startuml
+' ============================================================
+' UML TEMPLATE
+' Замініть назву, автора та елементи прикладу на власні дані.
+' Єдиний стиль для всіх діаграм практичної роботи №8.
+' ============================================================
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam defaultFontColor #243247
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowColor #55708F
+skinparam ArrowFontColor #243247
+skinparam dpi 150
+
+skinparam classAttributeIconSize 0
+skinparam class {
+  BackgroundColor #EAF1F8
+  BorderColor #54708E
+  ArrowColor #54708E
+}
+skinparam usecase {
+  BackgroundColor #EAF1F8
+  BorderColor #54708E
+}
+skinparam state {
+  BackgroundColor #EAF1F8
+  BorderColor #54708E
+  ArrowColor #54708E
+}
+skinparam activity {
+  BackgroundColor #EAF1F8
+  BorderColor #54708E
+  DiamondBackgroundColor #FFF4D6
+  DiamondBorderColor #B98A36
+  ArrowColor #54708E
+}
+skinparam sequence {
+  ParticipantBackgroundColor #EAF1F8
+  ParticipantBorderColor #54708E
+  LifeLineBorderColor #8A9BB0
+  ArrowColor #54708E
+}
+
+' Назва діаграми та метадані
+ title Назва UML-діаграми
+
+legend left
+  **Легенда нотації**
+  Синій блок — елемент моделі
+  Суцільна стрілка — напрямок переходу / повідомлення
+  1, 0..*, 1..* — кратність зв'язку
+  + public | - private | # protected
+  --
+  Автор: [ПІБ студента]
+  Версія: 1.0
+  Дата: 22.11.2026
+endlegend
+
+' Приклад елемента. Замініть його власною моделлю.
+class "Приклад класу" as Example {
+  - id: int
+  + execute(): void
+}
+
+@enduml

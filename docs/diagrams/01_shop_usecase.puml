@@ -1,0 +1,37 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam defaultFontColor #243247
+skinparam shadowing false
+skinparam roundcorner 12
+skinparam ArrowColor #55708F
+skinparam dpi 150
+skinparam usecase {
+  BackgroundColor #EAF1F8
+  BorderColor #54708E
+}
+
+ title Тренувальна діаграма варіантів використання — Інтернет-магазин
+
+left to right direction
+actor "Покупець" as Customer
+actor "Адміністратор" as Admin
+rectangle "Інтернет-магазин" {
+  usecase "Переглянути каталог" as UC1
+  usecase "Оформити замовлення" as UC2
+  usecase "Керувати товарами" as UC3
+}
+Customer -- UC1
+Customer -- UC2
+Admin -- UC3
+
+legend left
+  **Легенда**
+  Актор — зовнішній користувач системи
+  Овал — варіант використання
+  Лінія — взаємодія актора із системою
+  --
+  Автор: [ПІБ студента] | Версія: 1.0 | Дата: 22.11.2026
+endlegend
+@enduml
