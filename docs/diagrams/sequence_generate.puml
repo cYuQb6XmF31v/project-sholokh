@@ -1,0 +1,34 @@
+
+@startuml
+title UC-04 — Згенерувати тест-кейси
+autonumber
+
+actor "Тестувальник" as User
+boundary "Інтерфейс системи" as UI
+control "RequirementService" as RS
+control "AIService" as AI
+control "TestCaseService" as TS
+database "RequirementRepository" as RDB
+database "TestCaseRepository" as TDB
+
+User -> UI : generateTestCases(projectId)
+UI -> RS : getRequirements(projectId)
+RS -> RDB : findByProjectId(projectId)
+RDB --> RS : список вимог
+RS --> UI : список вимог
+
+loop [для кожної вимоги]
+    UI -> AI : analyzeRequirement(requirement)
+    AI --> UI : результати аналізу
+end
+
+UI -> AI : generateTestCases(requirements)
+AI --> UI : згенеровані тест-кейси
+
+UI -> TS : saveTestCases(testCases)
+TS -> TDB : saveTestCases(testCases)
+TDB --> TS : результат збереження
+TS --> UI : список збережених тест-кейсів
+UI --> User : відобразити тест-кейси
+
+@enduml
