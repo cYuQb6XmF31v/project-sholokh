@@ -1,0 +1,44 @@
+
+@startuml
+title Діаграма комунікації — Генерація тест-кейсів
+
+left to right direction
+skinparam linetype ortho
+skinparam nodesep 80
+skinparam ranksep 90
+skinparam object {
+    MinimumWidth 150
+}
+
+object "Тестувальник" as User
+object "Інтерфейс системи" as UI
+object "RequirementService" as RS
+object "RequirementRepository" as RDB
+object "AIService" as AI
+object "TestCaseService" as TS
+object "TestCaseRepository" as TDB
+
+User -right- UI
+UI -right- RS
+RS -down- RDB
+UI -down- AI
+AI -right- TS
+TS -down- TDB
+
+User -> UI : 1. Запуск генерації
+UI -> RS : 1.1. Отримати вимоги
+RS -> RDB : 1.2. Знайти вимоги проєкту
+RDB --> RS : 1.3. Список вимог
+RS --> UI : 1.4. Передати вимоги
+
+UI -> AI : 2. Аналіз і генерація
+AI --> UI : 2.1. Згенеровані тест-кейси
+
+UI -> TS : 3. Передати тест-кейси
+TS -> TDB : 3.1. Зберегти тест-кейси
+TDB --> TS : 3.2. Результат збереження
+TS --> UI : 3.3. Підтвердження
+
+UI --> User : 4. Відобразити результат
+
+@enduml
