@@ -1,0 +1,30 @@
+
+@startuml
+title UC-06 — Редагувати тест-кейс
+autonumber
+
+actor "Тестувальник" as User
+boundary "Інтерфейс системи" as UI
+control "TestCaseService" as TS
+database "TestCaseRepository" as DB
+
+User -> UI : вибратиТестКейс(testCaseId)
+UI -> TS : getTestCase(testCaseId)
+TS -> DB : findById(testCaseId)
+DB --> TS : дані тест-кейсу
+TS --> UI : відобразити тест-кейс
+
+User -> UI : змінитиДані(testCase)
+UI -> TS : updateTestCase(testCaseId, data)
+
+alt [дані коректні]
+    TS -> DB : update(testCaseId, data)
+    DB --> TS : результат оновлення
+    TS --> UI : зміни збережено
+    UI --> User : показати оновлений тест-кейс
+else [дані некоректні]
+    TS --> UI : помилка валідації
+    UI --> User : показати помилки введення
+end
+
+@enduml
