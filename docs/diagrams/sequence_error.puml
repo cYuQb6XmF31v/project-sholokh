@@ -1,0 +1,28 @@
+
+@startuml
+title Обробка помилки — Недоступність бази даних
+autonumber
+
+actor "Тестувальник" as User
+boundary "Інтерфейс системи" as UI
+control "TestCaseService" as TS
+database "TestCaseRepository" as DB
+control "Logger" as Log
+
+User -> UI : generateTestCases(projectId)
+UI -> TS : saveTestCases(testCases)
+TS -> DB : saveTestCases(testCases)
+
+alt [база даних доступна]
+    DB --> TS : результат збереження
+    TS --> UI : збереження успішне
+    UI --> User : тест-кейси збережено
+else [база даних недоступна]
+    DB --> TS : DatabaseConnectionException
+    TS -> Log : logError(error, timestamp)
+    Log --> TS : помилку записано
+    TS --> UI : повідомлення про помилку
+    UI --> User : Не вдалося зберегти тест-кейси. Спробуйте пізніше.
+end
+
+@enduml
