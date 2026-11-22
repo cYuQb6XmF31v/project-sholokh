@@ -1,0 +1,25 @@
+
+@startuml
+title UC-02 — Увійти в систему
+autonumber
+
+actor "Тестувальник" as User
+boundary "Сторінка авторизації" as UI
+control "AuthService" as Auth
+database "UserRepository" as DB
+
+User -> UI : ввестиДані(email, password)
+UI -> Auth : login(email, password)
+Auth -> DB : findByEmail(email)
+DB --> Auth : дані користувача
+
+alt [користувача знайдено і пароль правильний]
+    Auth -> Auth : verifyPassword(password)
+    Auth --> UI : авторизація успішна
+    UI --> User : відкрити особистий кабінет
+else [неправильний email або пароль]
+    Auth --> UI : помилка авторизації
+    UI --> User : показати повідомлення про помилку
+end
+
+@enduml
