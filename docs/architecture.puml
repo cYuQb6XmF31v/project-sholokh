@@ -1,0 +1,53 @@
+
+@startuml
+!theme plain
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam packageStyle rectangle
+skinparam componentStyle rectangle
+
+actor "Користувач" as User
+
+node "Вебклієнт\n(container)" as WebClient {
+  artifact "React SPA\nJavaScript, React, Vite\nІнтерфейс користувача" as React
+}
+
+node "Вебсервер\n(container)" as WebServer {
+  component "Nginx\nHTTPS, статичні файли,\nreverse proxy" as Nginx
+}
+
+node "Сервер застосунку\n(container: модульний моноліт)" as AppServer {
+  component "REST API\nNode.js + Express" as API
+
+  package "Функціональні модулі" {
+    component "Автентифікація\nта користувачі" as Auth
+    component "Проєкти\nта вимоги" as Requirements
+    component "Генерація\nтест-кейсів" as Generation
+    component "Керування тест-кейсами\nта експорт" as TestCases
+  }
+}
+
+database "База даних\nPostgreSQL" as DB
+
+User --> React : Робота через браузер
+React --> Nginx : HTTPS
+Nginx --> API : REST API / JSON
+
+API --> Auth : Виклик модуля
+API --> Requirements : Виклик модуля
+API --> Generation : Виклик модуля
+API --> TestCases : Виклик модуля
+
+Auth --> DB : SQL / транзакції
+Requirements --> DB : SQL / транзакції
+Generation --> DB : Читання та запис
+TestCases --> DB : SQL / транзакції
+
+note bottom of AppServer
+  Усі серверні модулі входять
+  до одного застосунку та
+  розгортаються разом.
+end note
+
+@enduml
