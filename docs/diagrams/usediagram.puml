@@ -1,0 +1,73 @@
+@startuml
+
+left to right direction
+
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam actorStyle awesome
+
+actor "Користувач" as User
+actor "Тестувальник" as Tester
+actor "QA-менеджер" as Manager
+actor "Розробник" as Developer
+actor "Менеджер проєкту" as PM
+actor "Адміністратор" as Admin
+actor "Зовнішній AI-сервіс" as AI
+
+Tester --|> User
+Manager --|> User
+Developer --|> User
+PM --|> User
+Admin --|> User
+
+rectangle "Вебзастосунок для автоматичного\nстворення тест-кейсів" {
+
+    usecase "Зареєструвати\nобліковий запис" as UC1
+    usecase "Увійти в систему" as UC2
+
+    usecase "Ввести вимогу" as UC3
+    usecase "Згенерувати\nтест-кейси" as UC4
+    usecase "Перевірити\nкоректність вимоги" as UC15
+    usecase "Проаналізувати\nвимогу через AI" as UC16
+    usecase "Сформувати структуру\nтест-кейсу" as UC17
+
+    usecase "Переглянути\nтест-кейси" as UC5
+    usecase "Редагувати\nтест-кейс" as UC6
+    usecase "Видалити\nтест-кейс" as UC7
+    usecase "Експортувати\nтест-кейси" as UC8
+    usecase "Знайти тест-кейс" as UC9
+    usecase "Фільтрувати\nтест-кейси" as UC10
+    usecase "Переглянути\nісторію" as UC11
+
+    usecase "Переглянути тести\nінших користувачів" as UC12
+    usecase "Переглянути вимоги\nта тест-кейси" as UC13
+    usecase "Керувати обліковими\nзаписами" as UC14
+}
+
+User --> UC1
+User --> UC2
+
+Tester --> UC3
+Tester --> UC4
+Tester --> UC5
+Tester --> UC6
+Tester --> UC7
+Tester --> UC8
+Tester --> UC9
+Tester --> UC10
+Tester --> UC11
+
+Manager --> UC12
+Developer --> UC13
+PM --> UC11
+Admin --> UC14
+
+AI --> UC16
+
+UC4 ..> UC15 : <<include>>
+UC4 ..> UC16 : <<include>>
+UC4 ..> UC17 : <<include>>
+
+UC8 ..> UC5 : <<extend>>
+
+@enduml
