@@ -1,0 +1,134 @@
+
+@startuml
+title Діаграма класів вебзастосунку для автоматичного створення тест-кейсів
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+
+abstract class User {
+  - id: int
+  - name: String
+  - email: String
+  - password: String
+  + login(): boolean
+  + logout(): void
+  + updateProfile(): void
+}
+
+class Tester {
+  - specialization: String
+  + createRequirement(): void
+  + generateTestCases(): void
+  + editTestCase(): void
+}
+
+class QAManager {
+  - department: String
+  + viewTeamTestCases(): void
+  + createReport(): Report
+}
+
+class Administrator {
+  - accessLevel: int
+  + blockUser(): void
+  + unblockUser(): void
+  + manageUsers(): void
+}
+
+class Project {
+  - id: int
+  - name: String
+  - description: String
+  - createdAt: Date
+  + addRequirement(): void
+  + removeRequirement(): void
+  + getTestCases(): List
+}
+
+class Requirement {
+  - id: int
+  - title: String
+  - description: String
+  - priority: String
+  - status: String
+  + create(): void
+  + update(): void
+  + delete(): void
+  + validate(): boolean
+}
+
+class TestCase {
+  - id: int
+  - title: String
+  - preconditions: String
+  - expectedResult: String
+  - status: String
+  + create(): void
+  + update(): void
+  + delete(): void
+  + execute(): TestResult
+}
+
+class TestStep {
+  - id: int
+  - description: String
+  - expectedAction: String
+  - order: int
+  + update(): void
+  + validate(): boolean
+}
+
+class TestSuite {
+  - id: int
+  - name: String
+  - description: String
+  + addTestCase(): void
+  + removeTestCase(): void
+  + getTestCases(): List
+}
+
+class TestResult {
+  - id: int
+  - status: String
+  - executionDate: Date
+  - comment: String
+  + saveResult(): void
+  + updateResult(): void
+}
+
+class Report {
+  - id: int
+  - title: String
+  - createdAt: Date
+  - format: String
+  + generate(): void
+  + exportPDF(): void
+  + exportCSV(): void
+}
+
+interface AIService {
+  + analyzeRequirement(): String
+  + generateTestCases(): List
+}
+
+User <|-- Tester
+User <|-- QAManager
+User <|-- Administrator
+
+User "1" -- "0..*" Project : створює
+Project "1" *-- "1..*" Requirement : містить
+Requirement "1" -- "0..*" TestCase : формує
+Tester "1" -- "0..*" TestCase : створює
+
+TestCase "1" *-- "1..*" TestStep : складається з
+TestSuite "0..*" o-- "1..*" TestCase : об'єднує
+TestCase "1" -- "0..*" TestResult : має результати
+
+QAManager "1" -- "0..*" Report : формує
+Report "0..*" --> "1" Project : звіт про
+Report ..> TestResult : використовує
+
+TestCase ..> AIService : використовує
+
+@enduml
